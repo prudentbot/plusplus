@@ -3,10 +3,25 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+  {{> router}}
 </body>
+
+<template name="router">
+	{{#if loggedIn}}
+		{{> home}}
+	{{else}}
+		{{> loginpage}}
+	{{/if}}
+</template>
+
+<template name="home">
+	<h1> home </h1>
+</template>
+
+<template name="loginpage">
+  <h1>loginpage</h1>
+  {{> loginButtons}}
+</template>
 
 <template name="hello">
   <button>Click Me</button>
