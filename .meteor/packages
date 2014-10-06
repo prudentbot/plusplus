@@ -11,4 +11,5 @@ accounts-password
 accounts-twitter
 accounts-ui
 accounts-base
+iron:router
 

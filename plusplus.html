@@ -4,7 +4,7 @@
 
 <body>
   {{> loginButtons}}
-  {{> router}}
+  {{> navbar}}
 </body>
 
 <template name="router">
@@ -15,6 +15,13 @@
 	{{/if}}
 </template>
 
+<template name="navbar">
+	<div>
+		<a href="/"> home </a>
+		<a href="log"> log </a>
+	</div>
+</template>
+
 <template name="home">
 	<h1> home </h1>
 	<input type="text" id="temp-handle"/>
@@ -23,10 +30,19 @@
 		<div style="border-width:1px; border-style:solid">
 			<p> handle: {{handle}} </p>
 			<p> points : {{points}} </p>
-			<button id="plus"> plusplus! </button>
-			<button id="minus"> minusminus. </button>
+			<button id="profile"> profile </button>
 		</div>
 	{{/each}}
+</template>
+
+<template name="profile">
+	<h1> profile page </h1>
+	<div>
+		<p>handle: {{profile.handle}} </p>
+		<p>points: {{profile.points}} </p>
+		<button id="plus"> plusplus! </button>
+		<button id="minus"> minusminus. </button>
+	</div>
 </template>
 
 <template name="loginpage">
@@ -34,7 +50,7 @@
   <h2> log in to continue! </h2> 
 </template>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="log">
+	<h1> log </h1>
+
 </template>
