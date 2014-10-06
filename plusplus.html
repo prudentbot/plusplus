@@ -3,6 +3,7 @@
 </head>
 
 <body>
+  {{> loginButtons}}
   {{> router}}
 </body>
 
@@ -16,11 +17,21 @@
 
 <template name="home">
 	<h1> home </h1>
+	<input type="text" id="temp-handle"/>
+	<button id="temp-create-handle"> create! </button>
+	{{#each plusems}}
+		<div style="border-width:1px; border-style:solid">
+			<p> handle: {{handle}} </p>
+			<p> points : {{points}} </p>
+			<button id="plus"> plusplus! </button>
+			<button id="minus"> minusminus. </button>
+		</div>
+	{{/each}}
 </template>
 
 <template name="loginpage">
   <h1>loginpage</h1>
-  {{> loginButtons}}
+  <h2> log in to continue! </h2> 
 </template>
 
 <template name="hello">
