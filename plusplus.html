@@ -52,5 +52,13 @@
 
 <template name="log">
 	<h1> log </h1>
-
+	{{#each transactions}}
+		<div style="border-width:1px; border-style:solid">
+			<p> from: {{from}} </p>
+			<p> to: {{to}} </p>
+			<p> time: {{time}} </p>
+			<p> plus: {{plus}} </p>
+			<p> reason: {{reason}} </p>
+		</div>
+	{{/each}}
 </template>

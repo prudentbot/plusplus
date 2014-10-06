@@ -24,18 +24,20 @@ if (Meteor.isClient) {
 
   Template.profile.events({
     'click #plus': function () {
-      Meteor.call('plus', Session.get('selected_profile_id'));
+      Meteor.call('plus', Session.get('selected_profile_id'), Meteor.userId());
     },
     'click #minus': function () {
-      Meteor.call('minus', Session.get('selected_profile_id'));
-    },
-
+      Meteor.call('minus', Session.get('selected_profile_id'), Meteor.userId());
+    }
   })
+
+  Template.log.transactions = function () {
+    return Transactions.find();
+  }
 
   Accounts.ui.config({
    passwordSignupFields: 'USERNAME_ONLY'
   });
-
 }
 
 if (Meteor.isServer) {
@@ -44,11 +46,27 @@ if (Meteor.isServer) {
   });
 
   Meteor.methods({
-    plus: function (_id) {
-      Plusems.update(_id, {$inc: {points: 1}});
+    plus: function (to_id, from_id) {
+      Plusems.update(to_id, {$inc: {points: 1}});
+      Transactions.insert(
+        {
+          from: from_id,
+          to: to_id,
+          time: (new Date()).getTime(),
+          reason: "placeholder",
+          plus:true
+        })
     },
-    minus: function (_id) {
-      Plusems.update(_id, {$inc: {points: -1}});
+    minus: function (to_id, from_id) {
+      Plusems.update(to_id, {$inc: {points: -1}});
+      Transactions.insert(
+        {
+          from: from_id,
+          to: to_id,
+          time: (new Date()).getTime(),
+          reason: "placeholder",
+          plus:false
+        })
     },
     add: function(handle) {
       Plusems.upsert({handle:handle}, {$set: {points:0}})
@@ -61,3 +79,4 @@ Router.route("profile", {template:"profile"})
 Router.route("log", {template:"log"})
 
 Plusems = new Mongo.Collection("plusem");
+Transactions = new Mongo.Collection("transaction");
